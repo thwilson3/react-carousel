@@ -25,5 +25,3 @@ it("matches snapshot", function () {
   expect(container).toMatchSnapshot();
 
 });
-
-// Card({caption, src, currNum, totalNum})
