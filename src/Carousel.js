@@ -14,37 +14,46 @@ import Card from "./Card";
  *
  * App --> Carousel --> Card
  */
- function Carousel({ photos, title }) {
+function Carousel({ photos, title }) {
   const [currCardIdx, setCurrCardIdx] = useState(0);
 
   const currCard = photos[currCardIdx];
   const total = photos.length;
 
-  //TODO: idx never resets to 0
-  //Increments currCardIdx state by 1
+  // Increments currCardIdx state by 1
   function goForward() {
     setCurrCardIdx(currCardIdx + 1);
   }
 
-  //TODO: no functionality to go backward
+  // Decrements currCardIdx state by 1
+  function goBackward() {
+    setCurrCardIdx(currCardIdx - 1);
+  }
+
   return (
     <div className="Carousel">
       <h1>{title}</h1>
       <div className="Carousel-main">
-        <i
-          className="bi bi-arrow-left-circle"
-          onClick={goForward}
-        />
+        {/* Having element always there and changing display property will give a cleaner UI */}
+        {currCardIdx === 0
+          ? null
+          : <i
+            className="bi bi-arrow-left-circle"
+            onClick={goBackward}
+          />}
         <Card
           caption={currCard.caption}
           src={currCard.src}
           currNum={currCardIdx + 1}
           totalNum={total}
         />
-        <i
-          className="bi bi-arrow-right-circle"
-          onClick={goForward}
-        />
+        {currCardIdx + 1 === total
+          ? null
+          : <i
+            className="bi bi-arrow-right-circle"
+            onClick={goForward}
+          />
+        }
       </div>
     </div>
   );
